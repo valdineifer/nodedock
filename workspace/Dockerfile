@@ -36,7 +36,6 @@ RUN apt-get update && \
         curl \
         vim \
         nano \
-        postgresql-client \
     && apt-get clean
 
 # Source the bash
