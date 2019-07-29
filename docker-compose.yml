@@ -58,7 +58,7 @@ services:
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       ports:
-        - "${WORKSPACE_SSH_PORT}:22"
+        - "${WORKSPACE_SSH_PORT}:2222"
       tty: true
       environment: {}
       networks:
