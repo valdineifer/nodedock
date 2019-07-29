@@ -106,6 +106,15 @@ NGINX_SITES_PATH=./nginx/sites/
 NGINX_NODE_UPSTREAM_CONTAINER=node
 NGINX_NODE_UPSTREAM_PORT=9000
 
+### MARIADB ###############################################
+
+MARIADB_DATABASE=default
+MARIADB_USER=default
+MARIADB_PASSWORD=secret
+MARIADB_PORT=3306
+MARIADB_ROOT_PASSWORD=root
+MARIADB_ENTRYPOINT_INITDB=./mariadb/docker-entrypoint-initdb.d
+
 ### MYSQL #################################################
 
 MYSQL_VERSION=latest

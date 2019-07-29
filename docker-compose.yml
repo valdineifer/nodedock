@@ -7,25 +7,27 @@ networks:
     driver: ${NETWORKS_DRIVER}
 
 volumes:
-  mysql:
-    driver: ${VOLUMES_DRIVER}
-  postgres:
-    driver: ${VOLUMES_DRIVER}
-  memcached:
-    driver: ${VOLUMES_DRIVER}
-  redis:
-    driver: ${VOLUMES_DRIVER}
-  mongo:
-    driver: ${VOLUMES_DRIVER}
-  rethinkdb:
-    driver: ${VOLUMES_DRIVER}
-  phpmyadmin:
-    driver: ${VOLUMES_DRIVER}
   adminer:
     driver: ${VOLUMES_DRIVER}
   caddy:
     driver: ${VOLUMES_DRIVER}
   elasticsearch:
+    driver: ${VOLUMES_DRIVER}
+  mariadb:
+    driver: ${VOLUMES_DRIVER}
+  memcached:
+    driver: ${VOLUMES_DRIVER}
+  mongo:
+    driver: ${VOLUMES_DRIVER}
+  mysql:
+    driver: ${VOLUMES_DRIVER}
+  phpmyadmin:
+    driver: ${VOLUMES_DRIVER}
+  postgres:
+    driver: ${VOLUMES_DRIVER}
+  redis:
+    driver: ${VOLUMES_DRIVER}
+  rethinkdb:
     driver: ${VOLUMES_DRIVER}
 
 services:
@@ -155,6 +157,24 @@ services:
         - EMAIL="fake.email@gmail.com"
       networks:
         - frontend
+
+### MariaDB ##############################################
+    mariadb:
+      build:
+        context: ./mariadb
+      environment:
+        - MARIADB_DATABASE=${MARIADB_DATABASE}
+        - MARIADB_USER=${MARIADB_USER}
+        - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+        - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+        - TZ=${WORKSPACE_TIMEZONE}
+      volumes:
+        - ${DATA_PATH_HOST}/mariadb:/var/lib/mysql
+        - ${MARIADB_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+      ports:
+        - "${MARIADB_PORT}:3306"
+      networks:
+        - backend
 
 ### MySQL ################################################
     mysql:
